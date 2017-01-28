@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   @ViewChild('myvideo') myVideo: any;
   
   title = 'app works!';
-  
+  SimplePeer: any;
   targetpeer: any;
   peer: any;
   n = <any>navigator;
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     let peerx: any;
     this.n.getUserMedia = (this.n.getUserMedia || this.n.webkitGetUserMedia || this.n.mozGetUserMedia || this.n.msGetUserMedia);
     this.n.getUserMedia({video:true, audio:true}, function(stream) {
-    peerx = new SimplePeer ({
+    peerx = new this.SimplePeer ({
       initiator: location.hash === '#init',
       trickle: false,
       stream:stream
