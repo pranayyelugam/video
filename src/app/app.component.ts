@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   @ViewChild('myvideo') myVideo: any;
   
   title = 'app works!';
-  SimplePeer: any;
+  
   targetpeer: any;
   peer: any;
   n = <any>navigator;
@@ -20,14 +20,13 @@ export class AppComponent implements OnInit {
     let peerx: any;
     this.n.getUserMedia = (this.n.getUserMedia || this.n.webkitGetUserMedia || this.n.mozGetUserMedia || this.n.msGetUserMedia);
     this.n.getUserMedia({video:true, audio:true}, function(stream) {
-    peerx = new this.SimplePeer ({
+    peerx = new SimplePeer ({
       initiator: location.hash === '#init',
       trickle: false,
       stream:stream
     })
     
     peerx.on('signal', function(data) {
-      console.log('data');
       console.log(JSON.stringify(data));
       
       this.targetpeer = data;
@@ -45,12 +44,11 @@ export class AppComponent implements OnInit {
     }, function(err){
     console.log('Failed to get stream', err);
     });
-    console.log(peerx);
+    
     setTimeout(() => {
       this.peer = peerx;
-      console.log('data');
-      console.log(peerx);
-    }, 10000);
+      console.log(this.peer);
+    }, 5000);
   }
   
   connect() {
